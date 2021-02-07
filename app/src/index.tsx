@@ -1,11 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import ReactDOM from 'react-dom';
+import { MainStyled } from './styled'
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <MainStyled.Container>
     <App />
-  </React.StrictMode>,
+  </MainStyled.Container>,
   document.getElementById('root')
 );
 
