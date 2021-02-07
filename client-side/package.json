@@ -44,6 +44,8 @@
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.0.0",
-    "@types/styled-components": "^5.1.7"
+    "@types/styled-components": "^5.1.7",
+    "@types/faker": "^5.1.6",
+    "faker": "^5.3.1"
   }
 }
