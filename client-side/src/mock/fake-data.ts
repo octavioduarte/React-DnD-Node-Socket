@@ -8,6 +8,7 @@ const generateCards = (amount: number): DraggableType[] => {
         fakeCards.push({
             cardIcon: faker.image.imageUrl(),
             email: faker.internet.email(),
+            id: faker.random.number(),
             user: faker.name.firstName(),
             title: faker.random.words(2)
         })
@@ -17,18 +18,21 @@ const generateCards = (amount: number): DraggableType[] => {
 }
 
 export const Droppable: DroppableType[] = [
-    {
-        title: 'To do',
-        cards: generateCards(8)
-    },
-    {
+    [{
+        cards: generateCards(8),
+        droppableId: 0,
+        title: 'To Do'
+    }],
+    [{
+        cards: generateCards(6),
+        droppableId: 1,
         title: 'Doing',
-        cards: generateCards(6)
-    },
-    {
+    }],
+    [{
+        cards: generateCards(10),
+        droppableId: 2,
         title: 'Done',
-        cards: generateCards(3)
-    },
+    }],
 ]
 
 

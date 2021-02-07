@@ -1,23 +1,14 @@
-import { FC, useState } from 'react';
-import { MainStyled } from './styled'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { FC, Fragment, useEffect, useState } from 'react';
+import { MainStyled } from './styled';
+import { DroppableType, DraggableType } from './types';
+import { Droppable as Tables } from './mock/fake-data'
+import DroppableTables from './components/droppable'
+import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
 
-
-
-type ItemsList = {
-  content: string;
-  id: string;
-}
-
-const getData = (quantity: number) => Array.from({ length: quantity }, (_v, k) => k).map(k => ({
-  id: `item-${k}`,
-  content: `item ${k}`
-}));
 
 const App: FC = () => {
-  const [items, setItems] = useState(getData(10))
-
-  const reorder = (list: ItemsList[], startIndex: number, endIndex: number): ItemsList[] => {
+  const [columns, setColumns] = useState<DroppableType[]>([])
+  const reorder = (list: DraggableType[], startIndex: number, endIndex: number): DraggableType[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -27,52 +18,74 @@ const App: FC = () => {
 
 
   const onDragEnd = (result: DropResult) => {
+    const { source, destination } = result;
 
-    if (!result.destination) {
+    if (!destination) {
       return;
     }
+    const sInd = +source.droppableId;
+    const dInd = +destination.droppableId;
 
-    const organizedItems = reorder(
-      items,
-      result.source.index,
-      result.destination.index
-    );
-    setItems(organizedItems)
+
+    const cardsFromColumnSource: DraggableType[] = columns[sInd][0].cards;
+    const cardsFromColumnDestination: DraggableType[] = columns[dInd][0].cards;
+
+    if (sInd === dInd) {
+      const items = reorder(cardsFromColumnSource, source.index, destination.index);
+      const newState = [...columns];
+      newState[sInd][0].cards = items;
+      setColumns(newState);
+    } else {
+      const result = move(cardsFromColumnSource, cardsFromColumnDestination, source, destination);
+      const newState = [...columns];
+      newState[sInd][0].cards = result[sInd];
+      newState[dInd][0].cards = result[dInd];
+
+      setColumns(newState.filter((group) => group.length));
+    }
   }
+
+
+  const move = (source: DraggableType[], destination: DraggableType[], droppableSource: DraggableLocation, droppableDestination: DraggableLocation) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+    destClone.splice(droppableDestination.index, 0, removed);
+
+    const result = {
+      [droppableSource.droppableId]: sourceClone,
+      [droppableDestination.droppableId]: destClone
+    };
+
+    return result;
+  };
+
+
+
+
+  useEffect(() => {
+    if (Tables && !columns.length) {
+      setColumns(Tables)
+    }
+  }, [columns])
+
+
 
   return (
     <>
       <h1>Hello</h1>
       <MainStyled.ContainerDnD>
         <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={MainStyled.DroppableStyle(snapshot.isDraggingOver)}
-              >
-                {items.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={MainStyled.DraggableStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                      >
-                        {item.content}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          {columns.length ?
+            columns.map((droppable, key) => (
+              <Fragment key={key}>
+                <DroppableTables
+                  droppableInfo={droppable}
+                />
+              </Fragment>
+            ))
+            : <h1>Carregando dados ...</h1>}
         </DragDropContext>
       </MainStyled.ContainerDnD>
     </>

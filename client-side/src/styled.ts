@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DragDropContext, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd'
+import { DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd'
 
 
 const Container = styled.div`
@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const DroppableStyle = (isDraggingOver: boolean) => ({
     background: isDraggingOver ? "#e8dbdb" : "#e8dbdb",
+    margin: '0 25px',
     padding: '15px 20px',
     width: 250
 })
@@ -20,7 +21,7 @@ const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | No
     cursor: "pointer",
     display: "block",
     ...draggableStyle,
-    height: '55px',
+    height: 'auto',
     marginBottom: "8px",
     maxWidth: "300px",
     minHeight: "20px",
@@ -29,13 +30,27 @@ const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | No
 });
 
 const ContainerDnD = styled.div`
-    padding: 15px 55px
+    display: flex; 
+    justify-content: center;
+    margin: 20px 0;
 `
+
+const TitleDroppable = styled.h3`
+    color: #172B4D;
+    font-size: 20px;
+    font-style: inherit;
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 10px 0 15px;
+    text-align: left;
+
+    `
 
 
 export const MainStyled = {
     Container,
     ContainerDnD,
     DraggableStyle,
-    DroppableStyle
+    DroppableStyle,
+    TitleDroppable
 }
