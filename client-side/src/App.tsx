@@ -74,7 +74,7 @@ const App: FC = () => {
 
   return (
     <>
-      <h1>Hello</h1>
+      <MainStyled.TitleApp>Joblins</MainStyled.TitleApp>
       <MainStyled.ContainerDnD>
         <DragDropContext onDragEnd={onDragEnd}>
           {columns.length ?
