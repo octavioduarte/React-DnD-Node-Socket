@@ -12,7 +12,7 @@ const DroppableStyle = (isDraggingOver: boolean) => ({
     borderRadius: '15px',
     margin: '0 25px',
     padding: '15px 20px',
-    width: 250
+    width: '250px'
 })
 
 const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | NotDraggingStyle | undefined) => ({
@@ -20,13 +20,14 @@ const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | No
     borderRadius: "3px",
     boxShadow: "0 1px 0 rgb(9 30 66 / 25%)",
     cursor: "pointer",
-    display: "block",
+    display: "flex",
     ...draggableStyle,
     height: 'auto',
+    justifyContent: 'space-between',
     marginBottom: "8px",
     maxWidth: "300px",
     minHeight: "20px",
-    padding: '20px 0',
+    padding: '20px 10px',
     textDecoration: "none",
 });
 
@@ -51,7 +52,17 @@ const TitleApp = styled.h3`
     color: #fff;
     font-size: 30px;
     text-trasnform: uppercase;
-` 
+`
+
+const ImageCard = styled.img`
+    border-radius: 50%;
+    flex-grow: 0;
+    height: 28px;
+    margin-top: 25px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    width: 28px;
+`
 
 
 export const MainStyled = {
@@ -59,6 +70,7 @@ export const MainStyled = {
     ContainerDnD,
     DraggableStyle,
     DroppableStyle,
+    ImageCard,
     TitleApp,
     TitleDroppable
 }
