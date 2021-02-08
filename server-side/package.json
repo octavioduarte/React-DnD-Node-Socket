@@ -19,6 +19,7 @@
     "socket.io": "^3.1.1"
   },
   "scripts": {
-    "dev": "ts-node src/server.ts"
+    "dev": "ts-node src/server.ts", 
+    "dev:create-fake-data": "ts-node src/db/scripts/populate-db.ts"
   }
 }
