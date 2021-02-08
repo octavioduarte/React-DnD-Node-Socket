@@ -4,6 +4,7 @@ import { DroppableType, DraggableType } from './types';
 import { Droppable as Tables } from './mock/fake-data'
 import DroppableTables from './components/droppable'
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
+import { socketConnection } from './socketConnection'
 
 
 const App: FC = () => {
@@ -69,6 +70,14 @@ const App: FC = () => {
       setColumns(Tables)
     }
   }, [columns])
+
+
+  useEffect(() => {
+    socketConnection.on('connect', () => {
+      console.log('connection established')
+    })
+  }, [])
+
 
 
 
