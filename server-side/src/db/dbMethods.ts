@@ -16,8 +16,8 @@ export const MongoHelper = {
         this.propsConnection = paramsDB
         this.client = await MongoClient.connect(paramsDB.url, {
             auth: {
-                user: paramsDB.user,
-                password: paramsDB.pwd
+                password: paramsDB.pwd,
+                user: paramsDB.user
             },
             useNewUrlParser: true,
             useUnifiedTopology: true

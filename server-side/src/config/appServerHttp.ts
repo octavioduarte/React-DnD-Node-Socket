@@ -1,11 +1,11 @@
 import express, { Express } from 'express'
 import setupMiddlewares from './middlewares'
-import Routes from '../loadHttpRoutes'
+import { RoutesApp } from '../routesLoader'
 
-const routes = new Routes()
+const routes = new RoutesApp()
 
 let serverHttp = express()
-serverHttp = routes.loadRoutes(serverHttp)
+serverHttp = routes.routesLoader(serverHttp)
 setupMiddlewares(serverHttp)
 
 
