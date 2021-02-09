@@ -10,6 +10,7 @@ export const env = {
         }
     },
     portSocketServer: 8000 || process.env.PORT,
+    portHttpServer: 4000 || process.env.PORT
 
 }
 
