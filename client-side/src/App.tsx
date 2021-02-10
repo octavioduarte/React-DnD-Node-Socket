@@ -1,10 +1,9 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { MainStyled } from './styled';
 import { DroppableType, DraggableType } from './types';
-import { Droppable as Tables } from './mock/fake-data'
 import DroppableTables from './components/droppable'
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
-import { socketConnection } from './socketConnection'
+import { get } from './api/index'
 
 
 const App: FC = () => {
@@ -63,21 +62,25 @@ const App: FC = () => {
   };
 
 
-
-
-  useEffect(() => {
-    if (Tables && !columns.length) {
-      setColumns(Tables)
+  const fetchTasks = async () => {
+    const { data } = await get({ url: '/tasks/get' })
+    const { tasks, success } = data;
+    if (success) {
+      const formattedData = tasks.map((task: any) => {
+        return [{
+          cards: task.cards,
+          droppableId: task.droppableId,
+          title: task.title
+        }]
+      })
+      setColumns(formattedData)
     }
-  }, [columns])
 
+  }
 
   useEffect(() => {
-    socketConnection.on('connect', () => {
-      console.log('connection established')
-    })
+    fetchTasks()
   }, [])
-
 
 
 

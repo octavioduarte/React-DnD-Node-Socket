@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import { env } from '../env'
 
 const request = async (params: AxiosRequestConfig) => {
     const secondsInMinute = 60;
@@ -28,7 +29,7 @@ const request = async (params: AxiosRequestConfig) => {
 
 export const get = (props: AxiosRequestConfig, baseURL?: string) =>
     request({
-        baseURL: baseURL || process.env.REACT_APP_BASE_URL,
+        baseURL: baseURL || env.urlServerHttp,
         ...props,
         method: 'GET',
     });
