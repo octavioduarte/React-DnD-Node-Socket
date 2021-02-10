@@ -6,6 +6,7 @@ import ErrorTemplate from './components/errorTemplate'
 import { FC, Fragment, useEffect, useState } from 'react';
 import { DroppableType, DraggableType, RequestStatus } from './types';
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
+import { socketConnection } from './socketConnection'
 
 
 const App: FC = () => {
@@ -46,6 +47,7 @@ const App: FC = () => {
 
       setColumns(newState.filter((group) => group.length));
     }
+    socketConnection.emit('update card position', columns)
   }
 
 
@@ -78,14 +80,18 @@ const App: FC = () => {
         }]
       })
       setColumns(formattedData)
-      setStatusRequest(RequestStatus.success) 
+      setStatusRequest(RequestStatus.success)
     }
-
   }
 
   useEffect(() => {
     fetchTasks()
   }, [])
+
+
+  socketConnection.on('event updates cards', (cardsPosition: any) => {
+    setColumns(cardsPosition)
+  })
 
 
   const renderContent = (): JSX.Element | JSX.Element[] => {
