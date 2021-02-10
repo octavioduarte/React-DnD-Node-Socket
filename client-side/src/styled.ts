@@ -46,7 +46,7 @@ const TitleDroppable = styled.p`
     margin: 10px 0 15px;
     text-align: left;
     text-transform: uppercase;
-    `
+`
 
 const TitleApp = styled.h3`
     color: #fff;
@@ -64,13 +64,39 @@ const ImageCard = styled.img`
     width: 28px;
 `
 
+const ContainerLoading = styled.div`
+    margin: 150px auto 0;
+`
+
+const ImageError = styled.img`
+    height: 180px;
+`
+
+const ContainerImageError = styled.div`
+    display: grid;
+    margin-top: 80px;
+`
+
+const TitleError = styled(TitleDroppable)`
+    color: #fff;
+    font-size: 12px;
+    font-style: inherit;
+    line-height: 1.2;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+`
 
 export const MainStyled = {
     Container,
     ContainerDnD,
+    ContainerImageError,
+    ContainerLoading,
     DraggableStyle,
     DroppableStyle,
     ImageCard,
+    ImageError,
     TitleApp,
-    TitleDroppable
+    TitleDroppable,
+    TitleError
 }
