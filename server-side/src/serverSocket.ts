@@ -14,7 +14,12 @@ MongoHelper.connect(env.dbConnection)
         console.error(`[SERVER SOCKET] Error establishing a database connection: ${error.message}`)
     })
 
-io.on("connection", (socket: Socket) => {
-    console.log(`New socket: ${socket.id}`)
+
+io.on("connection", (clientSocket: Socket) => {
+    console.log(`New socket: ${clientSocket.id}`)
+
+    clientSocket.on('update card position', updatedPositionCards => {
+        clientSocket.broadcast.emit('event updates cards', updatedPositionCards)
+    })
 });
 
