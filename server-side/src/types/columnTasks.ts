@@ -4,4 +4,4 @@ export type ColumnTasks = {
     cards: CardTasks[]
     droppableId: number
     title: string
-}[]
+}[][]
