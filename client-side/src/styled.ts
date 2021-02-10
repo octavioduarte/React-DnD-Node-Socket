@@ -12,7 +12,7 @@ const DroppableStyle = (isDraggingOver: boolean) => ({
     borderRadius: '15px',
     margin: '0 25px',
     padding: '15px 20px',
-    width: '250px'
+    width: '300px'
 })
 
 const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | NotDraggingStyle | undefined) => ({
@@ -57,11 +57,11 @@ const TitleApp = styled.h3`
 const ImageCard = styled.img`
     border-radius: 50%;
     flex-grow: 0;
-    height: 28px;
+    height: 45px;
     margin-top: 25px;
     margin-right: 8px;
     flex-shrink: 0;
-    width: 28px;
+    width: 45px;
 `
 
 const ContainerLoading = styled.div`
