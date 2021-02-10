@@ -3,7 +3,7 @@ import { MongoHelper } from './db'
 import { Server, Socket } from "socket.io";
 
 
-const io: Server = new Server(env.portSocketServer, env.optionsConnection);
+const io: Server = new Server(Number(env.portSocketServer), env.optionsConnection);
 
 
 MongoHelper.connect(env.dbConnection)
