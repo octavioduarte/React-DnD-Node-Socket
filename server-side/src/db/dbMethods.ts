@@ -29,14 +29,11 @@ export const MongoHelper = {
         this.client = null
     },
 
-    async getCollection(name: string): Promise<Collection | void> {
+    async getCollection(name: string): Promise<Collection> {
         if (!this.client?.isConnected()) {
             await this.connect(env.dbConnection)
         }
-
-        if (this.client) {
-            return this.client.db().collection(name)
-        }
+        return this.client?.db().collection(name) as Collection
     },
 
 
