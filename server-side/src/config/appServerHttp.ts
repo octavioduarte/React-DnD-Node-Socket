@@ -5,8 +5,8 @@ import { RoutesApp } from '../routesLoader'
 const routes = new RoutesApp()
 
 let serverHttp = express()
-serverHttp = routes.routesLoader(serverHttp)
 setupMiddlewares(serverHttp)
+serverHttp = routes.routesLoader(serverHttp)
 
 
 export default serverHttp

@@ -1,16 +1,14 @@
 import { Express, json } from 'express'
-
-
 import { Request, Response, NextFunction } from 'express'
 
-export const cors = (_req: Request, res: Response, next: NextFunction): void => {
+const cors = (_req: Request, res: Response, next: NextFunction): void => {
     res.set('access-control-allow-origin', '*')
     res.set('access-control-allow-headers', '*')
     res.set('access-control-allow-methods', '*')
     next()
 }
 
-export const contentType = (_req: Request, res: Response, next: NextFunction): void => {
+const contentType = (_req: Request, res: Response, next: NextFunction): void => {
     res.type('json')
     next()
 }
