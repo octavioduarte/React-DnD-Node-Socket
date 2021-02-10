@@ -8,10 +8,10 @@ const io: Server = new Server(Number(env.portSocketServer), env.optionsConnectio
 
 MongoHelper.connect(env.dbConnection)
     .then(() => {
-        console.info('Connection to database successful')
+        console.info('[SERVER SOCKET] Connection to database successful')
     })
     .catch((error: Error) => {
-        console.error(`Error establishing a database connection: ${error.message}`)
+        console.error(`[SERVER SOCKET] Error establishing a database connection: ${error.message}`)
     })
 
 io.on("connection", (socket: Socket) => {
