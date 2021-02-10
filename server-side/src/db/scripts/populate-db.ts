@@ -20,7 +20,7 @@ import { MongoHelper } from '../dbMethods'
         return fakeCards
     }
 
-    const columnWithFakeTasks: ColumnTasks[] = [
+    const columnWithFakeTasks: ColumnTasks[] = [[
         [{
             cards: generateCards(8),
             droppableId: 0,
@@ -36,13 +36,13 @@ import { MongoHelper } from '../dbMethods'
             droppableId: 2,
             title: 'Done',
         }],
-    ]
+    ]]
 
 
-    const tasksCollection: Collection | void = await MongoHelper.getCollection('tasks')
+    const tasksCollection: Collection = await MongoHelper.getCollection('tasks')
 
     if (tasksCollection) {
-        columnWithFakeTasks.forEach(async column => {
+        columnWithFakeTasks[0].forEach(async column => {
             const result = await tasksCollection.insertMany(column)
             console.log(result.ops[0])
         })
