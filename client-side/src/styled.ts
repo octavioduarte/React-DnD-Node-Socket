@@ -24,7 +24,7 @@ const DraggableStyle = (_isDragging: boolean, draggableStyle: DraggingStyle | No
     ...draggableStyle,
     height: 'auto',
     justifyContent: 'space-between',
-    marginBottom: "8px",
+    marginBottom: "15px",
     maxWidth: "300px",
     minHeight: "20px",
     padding: '20px 10px',
@@ -46,12 +46,6 @@ const TitleDroppable = styled.p`
     margin: 10px 0 15px;
     text-align: left;
     text-transform: uppercase;
-`
-
-const TitleApp = styled.h3`
-    color: #fff;
-    font-size: 30px;
-    text-trasnform: uppercase;
 `
 
 const ImageCard = styled.img`
@@ -87,8 +81,28 @@ const TitleError = styled(TitleDroppable)`
     text-transform: uppercase;
 `
 
+const ContainerCardContent = styled.div`
+    justify-content: space-between
+`
+
+const UserName = styled.p`
+    color: #6b778c;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase
+`
+
+const TitleCard = styled(UserName)`
+    color: #060110ad;
+    font-size: 18px;
+    font-weight: 300;
+    text-transform: initial
+`
+
+
 export const MainStyled = {
     Container,
+    ContainerCardContent,
     ContainerDnD,
     ContainerImageError,
     ContainerLoading,
@@ -96,7 +110,8 @@ export const MainStyled = {
     DroppableStyle,
     ImageCard,
     ImageError,
-    TitleApp,
+    TitleCard,
     TitleDroppable,
-    TitleError
+    TitleError,
+    UserName
 }

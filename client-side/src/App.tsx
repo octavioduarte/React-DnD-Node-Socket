@@ -104,19 +104,16 @@ const App: FC = () => {
     } else if (statusRequest === RequestStatus.fetching) {
       <LoadingTemplate />
     }
-    return <ErrorTemplate/>
+    return <ErrorTemplate />
   }
 
 
   return (
-    <>
-      <MainStyled.TitleApp>Joblins</MainStyled.TitleApp>
-      <MainStyled.ContainerDnD>
-        <DragDropContext onDragEnd={onDragEnd}>
-          {renderContent()}
-        </DragDropContext>
-      </MainStyled.ContainerDnD>
-    </>
+    <MainStyled.ContainerDnD>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {renderContent()}
+      </DragDropContext>
+    </MainStyled.ContainerDnD>
   )
 }
 

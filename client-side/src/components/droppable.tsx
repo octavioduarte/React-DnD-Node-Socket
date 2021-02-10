@@ -11,7 +11,7 @@ type DroppableTablesProps = {
 const DroppableTables: FC<DroppableTablesProps> = ({ droppableInfo }) => {
     const { cards, droppableId, title } = droppableInfo[0]
 
-    const checkLengthText = (text: string): string => text.length > 18 ? text.substring(0, 18) : text
+    const checkLengthText = (text: string): JSX.Element => <MainStyled.TitleCard>{text.length > 18 ? text.substring(0, 24) : text}</MainStyled.TitleCard>
     return (
         <Droppable droppableId={droppableId.toString()}>
             {(provided, snapshot) => (
@@ -25,6 +25,7 @@ const DroppableTables: FC<DroppableTablesProps> = ({ droppableInfo }) => {
                         <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                             {(provided, snapshot) => (
                                 <div
+                                    title={item.title}
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
@@ -33,9 +34,12 @@ const DroppableTables: FC<DroppableTablesProps> = ({ droppableInfo }) => {
                                         provided.draggableProps.style
                                     )}
                                 >
-                                    {checkLengthText(item.title)}
-                                    <MainStyled.ImageCard src={item.cardIcon} />
 
+                                    {checkLengthText(item.title)}
+                                    <MainStyled.ContainerCardContent>
+                                        <MainStyled.ImageCard src={item.cardIcon} />
+                                        <MainStyled.UserName>{item.user}</MainStyled.UserName>
+                                    </MainStyled.ContainerCardContent>
                                 </div>
                             )}
                         </Draggable>
