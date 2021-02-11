@@ -3,7 +3,6 @@ import { DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd'
 
 
 const Container = styled.div`
-    text-align: center;
     margin-top: 90px;
 `
 

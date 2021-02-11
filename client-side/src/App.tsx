@@ -3,7 +3,7 @@ import { MainStyled } from './styled';
 import DroppableView from './components/droppable'
 import LoadingTemplate from './components/loadingGif'
 import ErrorTemplate from './components/errorTemplate'
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { DroppableType, DraggableType, RequestStatus } from './types';
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
 import { socketConnection } from './socketConnection'
@@ -12,6 +12,7 @@ import { socketConnection } from './socketConnection'
 const App: FC = () => {
   const [columns, setColumns] = useState<DroppableType[]>([])
   const [statusRequest, setStatusRequest] = useState<RequestStatus>(RequestStatus.fetching)
+  
   const reorder = (list: DraggableType[], startIndex: number, endIndex: number): DraggableType[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -97,12 +98,10 @@ const App: FC = () => {
   const renderContent = (): JSX.Element | JSX.Element[] => {
     if (statusRequest === RequestStatus.success) {
       return columns.map((droppable, key) => (
-        <Fragment key={key}>
-          <DroppableView droppableInfo={droppable} />
-        </Fragment>
+        <DroppableView droppableInfo={droppable} key={key} />
       ))
     } else if (statusRequest === RequestStatus.fetching) {
-      <LoadingTemplate />
+      return <LoadingTemplate />
     }
     return <ErrorTemplate />
   }

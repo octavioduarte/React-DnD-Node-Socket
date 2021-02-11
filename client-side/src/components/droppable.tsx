@@ -11,7 +11,7 @@ type DroppableTablesProps = {
 const DroppableTables: FC<DroppableTablesProps> = ({ droppableInfo }) => {
     const { cards, droppableId, title } = droppableInfo[0]
 
-    const checkLengthText = (text: string): JSX.Element => <MainStyled.TitleCard>{text.length > 18 ? text.substring(0, 24) : text}</MainStyled.TitleCard>
+    const checkLengthText = (text: string): JSX.Element => <MainStyled.TitleCard>{text.length > 24 ? text.substring(0, 24) : text}</MainStyled.TitleCard>
     return (
         <Droppable droppableId={droppableId.toString()}>
             {(provided, snapshot) => (
